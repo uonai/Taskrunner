@@ -1,0 +1,14 @@
+[package]
+name = "Taskrunner"
+version = "0.1.0"
+authors = ["Uonai"]
+edition = "2018"
+
+[dependencies]
+lettre = "0.8.0"
+lettre_email = "0.8.0"
+dotenv = "0.14.1"
+mime = "0.3.13"
+native-tls = "0.1.5"
+chrono = "0.4"
+time = "0.1"
