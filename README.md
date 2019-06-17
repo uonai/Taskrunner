@@ -6,4 +6,4 @@ You can run this as a Cron Job each day to send yourself an email. I will also b
 
 For this application to function, you will need to install Rust and set up a .env file with your gmail credentials. You will also need to allow your Gmail to view less secure apps <https://support.google.com/accounts/answer/6010255?hl=en>.
 
-Boot application with $ Cargo Run
+After you have installed Rust and Cargo locally, boot application with $ cargo run
