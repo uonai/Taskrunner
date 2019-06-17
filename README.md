@@ -5,3 +5,5 @@ Taskrunner is a Rust application that generates an email based on the day of the
 You can run this as a Cron Job each day to send yourself an email. I will also be building a feature that automatically executes this Cron Job from within the Rust application.
 
 For this application to function, you will need to install Rust and set up a .env file with your gmail credentials. You will also need to allow your Gmail to view less secure apps <https://support.google.com/accounts/answer/6010255?hl=en>.
+
+Boot application with $ Cargo Run
