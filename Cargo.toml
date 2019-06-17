@@ -1,5 +1,5 @@
 [package]
-name = "Taskrunner"
+name = "taskrunner"
 version = "0.1.0"
 authors = ["Uonai"]
 edition = "2018"
@@ -12,3 +12,4 @@ mime = "0.3.13"
 native-tls = "0.1.5"
 chrono = "0.4"
 time = "0.1"
+azul = { git = "https://github.com/maps4print/azul", rev = "61ff75f" }

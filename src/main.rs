@@ -2,6 +2,7 @@ extern crate lettre;
 extern crate lettre_email;
 extern crate native_tls;
 extern crate chrono;
+extern crate azul;
 
 use lettre::smtp::authentication::{Credentials, Mechanism};
 use lettre::smtp::ConnectionReuseParameters;
@@ -16,9 +17,37 @@ use dotenv::dotenv;
 use chrono::prelude::*;
 use std::io::prelude::*;
 use std::fs::File;
+use azul::{prelude::*, widgets::{label::Label, button::Button}};
 
-fn main() {
+// ui implementation
 
+
+struct CounterApplication {
+    counter: usize,
+}
+
+impl Layout for CounterApplication {
+    fn layout(&self, _info: LayoutInfo<Self>) -> Dom<Self> {
+        let label = Label::new(format!("Emails sent: {}", self.counter)).dom();
+        let button = Button::with_label("Click to send email").dom()
+            .with_callback(On::MouseDown, Callback(update_counter));
+
+        Dom::new(NodeType::Div)
+            .with_child(label)
+            .with_child(button)
+            .with_class("Taskrunner")
+    }
+
+
+}
+
+fn update_counter(app_state: &mut AppState<CounterApplication>, _info: &mut CallbackInfo<CounterApplication>) -> UpdateScreen {
+    app_state.data.modify(|state| state.counter += 1);
+    send_mail();
+    Redraw
+}
+
+fn send_mail(){
     dotenv().ok();
     
     let email_username = env::var("EMAIL_USERNAME").unwrap();
@@ -76,3 +105,11 @@ fn main() {
 
     assert!(result.is_ok());
 }
+
+fn main() {
+    let mut app = App::new(CounterApplication { counter: 0 }, AppConfig::default()).unwrap();
+    let window = app.create_window(WindowCreateOptions::default(), css::native()).unwrap();
+    app.run(window).unwrap();
+}
+
+
